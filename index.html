@@ -31,7 +31,7 @@
 
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-
+    <script src="data.json"></script>
     <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 
     <script type="text/javascript">
@@ -46,6 +46,20 @@
         // terrain
         // watercolor
         map.addLayer(layer);
+
+        var taco_marker = L.icon({
+            iconUrl:'taco.png',
+            iconSize: [16,16]
+        })
+
+
+        $.each( data["tacos"], function(i, place){
+
+          $( "#taco-list" ).append("<li id='"+i+"'><a href='"+place["url"]+"' target='blank'>"+place["name"]+"</a> <small>("+place["neighborhood"]+")</small></li>")
+
+          var marker = L.marker(place["location"], {icon: taco_marker}).addTo(map);
+
+        });
       });
   </script>
 
